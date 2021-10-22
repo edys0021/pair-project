@@ -1,0 +1,41 @@
+## Level Database
+
+1. Schema table
+2. Menggunakan Sequelize 
+3. Memiliki 1 entitas wajib yaitu Users
+4. Terdapat column password untuk User
+5. Memiliki minimal 3 entitas/table tambahan tergantung tema yang diambil
+6. Memiliki asosisasi 1-to-1 dan 1-to-Many
+7. Membuat migrasi tambahan
+
+### Routes
+
+1. Minimal terdapat 1 dynamic route params
+2. Minimal terdapat 2 route get dan 1 route post
+
+### Explore
+
+1. Sistem login dengan Middleware, Session & Bcryptjs
+2. Membuat MVP 
+Menggunakan minimal 1 package tambahan yang dijadikan penambahan 
+feature dalam web-app
+3. Mendeploy pair project ke cloud environtment (pakai Heroku)
+
+### Level Aplikasi
+
+1. Menggunakan Fitur Search atau Sort
+2. Validasi dari Sequelize 
+3. Enkripsi dengan BcryptJs 
+4. Hooks //NAMA atau TTL
+5. Static method pada Model (buatan sendiri) //POTO PROFIL
+6. Instance method pada Model atau getter (buatan sendiri) //LIKE
+7. Middleware & Session untuk sistem login
+8. Helper 
+
+### Pages
+
+1. Landing Page (menggambarkan project)
+2. Login Page dengan menggunakan form dengan email & password //REVISI
+3. Halaman yang mengimplementasikan CRUD actions
+4. Logout (tombol dan route)
+5. Memiliki 1 halaman view yang menampilkan data gabungan dari >= 2 table

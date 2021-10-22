@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackgram</title>
+    <style>
+        .form {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .container {
+            width: 40%;
+            height: fit-content;
+            padding: 50px;
+            border-radius: 12px;
+            background-color: #fff;
+            box-shadow: 4px 4px 6px 4px hsla(0, 0%, 0%, 0.2);
+        }
+
+        .login>input,
+        .login>select {
+            padding: 5px;
+            width: 96%;
+            height: 40px;
+            border-radius: 5px;
+            border: solid 1px gray;
+            padding-left: 15px;
+            font-size:medium;
+        }
+
+        input[type=submit] {
+            cursor: pointer;
+            width: 120px;
+            height: 40px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: rgb(0, 128, 255);
+        }
+
+        .cancel {
+            width: 120px;
+            height: 40px;
+            margin: 10px;
+            background-color: rgb(243, 56, 56);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form">
+        <div class="container">
+            <% data.map(e => { %>
+            <form action="/profile/<%= e.id%>/edit" method="post" class="login">
+                <p style="text-align: center; font-size: 1.5em;">Edit profile</p><br>
+                <label>Fullname:</label><br>
+                <input type="text" name="fullname" placeholder="fullname" value="<%= e.Detail.fullName %>"><br><br>
+                <label>Email:</label><br>
+                <input type="text" name="email" placeholder="email" value="<%= e.email %>"><br><br>
+                <label for="gender">Gender:</label><br>
+                <select style="height: 50px; width: 100%;" name="gender">
+                    <%['Male', 'Female'].forEach(el => { %>
+                        <% if(el == e.Detail.gender) { %>
+                            <option selected value="<%=el %>"><%= el %></option>
+                            <% } else { %>
+                                <option value="<%=el %>"><%= el %></option>
+                        <% } %>
+                    <% })%> 
+                </select><br><br>
+                <label>Birthdate:</label><br>
+                <%if(e.Detail.birthDate) { %>
+                    <input type="text" name="birthdate" placeholder="birthdate" value="<%= e.Detail.birthDateFormat %>"><br><br>
+                <%} else { %> 
+                <input type="text" name="birthdate" placeholder="birthdate" value=""><br><br>
+                <% } %>
+                <% if(errors) { %>
+                    <% errors.forEach(e => { %>
+                        <p><%= e %> </p>
+                    <% }) %> 
+                <% } %> 
+                <div style="display: flex; justify-content: center;">
+                    <button class="cancel"><a style="color: #fff;text-decoration: none;"href="/profile/<%= e.id%>/detail">Cancel</a></button>
+                    <input type="submit" value="Update">
+                </div>
+                <% })  %> 
+            </form>
+        </div>
+    </div>
+</body>
+</html>

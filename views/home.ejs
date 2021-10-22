@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackgram</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .header {
+            width: 90vw;
+            height: 100px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: start;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 20vw;
+            height: 44vh;
+            margin: 1% 1%;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+            overflow: hidden;
+        }
+
+        .box {
+            width: 50vw;
+            height: fit-content;
+            margin: 1% 1%;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+            overflow: hidden;
+        }
+
+        .search {
+            width: 20vw;
+            height: fit-content;
+            margin: 1% 1%;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+            overflow: hidden;
+        }
+
+        .card .card-content {
+            width: 100%;
+            height: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        button {
+            width: 100px;
+            height: 30px;
+        }
+
+        .add-btn {
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: rgb(255, 166, 0);
+        }
+
+        .delete-btn {
+            background-color: rgb(243, 56, 56);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .profil {
+            height: 200px;
+            width: 200px;
+        }
+
+        .url {
+            height: 2em;
+            width: 30em;
+            border-radius: 5px;
+        }
+
+        .search-inp {
+            height: 2em;
+            width: 10em;
+            border-radius: 5px;
+        }
+
+        .caption {
+            height: 10em;
+            width: 30em;
+            border-radius: 5px;
+        }
+
+        .post {
+            height: 2em; 
+            width: 4em; 
+            background-color: royalblue; 
+            color:seashell; 
+            border: none; 
+            border-radius: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/home/<%= allData[0].id%>" style="margin-left: 2.6em; text-decoration: none; color: rgb(0, 47, 187); font-size: 3.3em; font-family:'Times New Roman', Times, serif">Hackgram</a>
+        <div style="display: flex;">
+            <div style="display: flex; margin-right: 6em;">
+                <button class="add-btn"><a style="color: #fff;text-decoration: none;" href="/profile/<%= data[0].id %>/detail">Profil</a></button>
+                <button class="delete-btn " style="margin-left: 1em;"><a style="color: #fff;text-decoration: none;" href="/">Logout</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <div style="margin-left: 10em;" class="card">
+            <center>
+                <% data.map(e => { %>
+                    <img style="margin-top: 2em;" src="<%= e.Detail.getProfilePitc %>" alt="profil" class="profil"><br><br>
+                    <a style="font-size: x-large; "><%=e.Detail.fullName%></a>   
+                    <% }) %> 
+            </center>
+            </div>
+        <div class="box">
+            <p>Post your feel</p><br>
+            <form action="/post/<%= data[0].id %>" method="post">
+                <label for="url">ImageUrl:</label><br>
+                <input class="url" type="text" name="url"><br><br>
+                <label for="caption">caption:</label><br>
+                <textarea class="caption" name="caption" ></textarea><br><br>
+                <input type="submit" class="post" value="Post">
+              </form>
+        </div>
+    </div>
+    <div class="content-container">
+        <div style="margin-left: 10em;" class="search">
+            <form action="/home/<%= data[0].id %>/?search=" method="GET">
+                <label for="search">Search:</label><br>
+                <input class="search-inp"  type="text" name="search"><br><br>
+                <button class="post" type="submit" value="submit">search</button><br><br>
+            </form>
+        </div>
+        <div class="box">
+            <p>Public</p><br>
+            <div style="margin-left: 2em;">
+                <% allData.map(el => { %>
+                        <% el.Posts.map(e => { %>
+                            <% if(e.imgUrl) { %>
+                            <p style="font-size: medium;"><%= el.Detail.fullName %></p><br> 
+                            <img src="<%=e.imgUrl%>" alt="post" style="height: 350px; width: 700px; border-radius: 5px;"><br><br>
+                            <p> <%= e.caption %> </p><br><br>
+                            <%} %> 
+                        <%})  %> 
+                <%}) %>  
+            </div>            
+        </div>
+    </div>
+</body>
+</html>
